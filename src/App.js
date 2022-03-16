@@ -11,12 +11,12 @@ import Admin from "./pages/admin/Admin"
 import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
-    <div>
+    <div className="container">
         <NavigationBar/>
         <Routes>
             <Route index element={<Home />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="photos" element={<Photos />} />
+            <Route path="photos/:event_id" element={<Photos />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="admin" element={<Admin />} />

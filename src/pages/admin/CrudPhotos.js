@@ -28,7 +28,7 @@ const CrudPhotos = () => {
 
   const getPhotos = () => {
     axios.get(`${URL}/photo`).then(response => {
-      console.log('GET EVENT',response.data)
+      console.log('GET PHOTO',response.data)
       if(response.data.success) {
         setPhotos(response.data.items)
       }
@@ -39,7 +39,7 @@ const CrudPhotos = () => {
 
   const deletePhotos = (id) => {
     axios.delete(`${URL}/photo/${id}`).then(response => {
-      console.log('DELETE EVENT',response.data)
+      console.log('DELETE PHOTO',response.data)
       if(response.data.success) {
         getPhotos()
       }
@@ -50,7 +50,7 @@ const CrudPhotos = () => {
   
   const editPhotos = (id) => {
     axios.get(`${URL}/photo/${id}`).then(response => {
-      console.log('GET EVENT BY ID',response.data)
+      console.log('GET PHOTO BY ID',response.data)
       if(response.data.success) {
         setValues(response.data.item)
         setEditing(true)
@@ -70,7 +70,7 @@ const CrudPhotos = () => {
       if(editing) {
         axios.patch(`${URL}/photo/${values.id}`, values)
         .then(function (response) {
-          console.log('PATCH EVENT',response.data)
+          console.log('PATCH PHOTO',response.data)
           if(response.data.success) {
             setValues({url: '', price: '', event: ''})
             setEditing(false)
@@ -83,7 +83,7 @@ const CrudPhotos = () => {
       } else {
         axios.post(`${URL}/photo`, values)
         .then(function (response) {
-          console.log('POST EVENT',response.data)
+          console.log('POST PHOTO',response.data)
           if(response.data.success) {
             setValues({url: '', price: '', event: ''})
             getPhotos()

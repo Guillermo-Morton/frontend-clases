@@ -20,11 +20,6 @@ const NavigationBar = () => {
       hide: !token
     },
     {
-      route: '/photos',
-      name: 'Photos',
-      hide: false
-    },
-    {
       route: '/login',
       name: 'Login',
       hide: token

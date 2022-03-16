@@ -11,3 +11,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.photos {
+  height: 350px;
+  object-fit: cover;
+}
+
+.photo-overlay {
+  transition: ease-in-out 0.2s;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  height: 350px;
+}
+.photo-overlay:hover {
+  background-color: rgba(0, 0, 0, 0.329);
+  transition: ease-in-out 0.2s;
+  opacity: 1;
+}
+
+.father-photos{
+  position: relative;
+}
+.events {
+  height: 600px;
+  object-fit: cover;
+}
