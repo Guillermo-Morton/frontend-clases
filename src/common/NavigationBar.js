@@ -1,51 +1,83 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Nav, Navbar, Container } from 'react-bootstrap';
+
 
 const NavigationBar = () => {
+  const token = JSON.parse(localStorage.getItem('token'))
+  const user = JSON.parse(localStorage.getItem('user'))
+  const location = useLocation()
+  const navigate = useNavigate()
   const links = [
     {
       route: '/',
-      name: 'Home'
+      name: 'Home',
+      hide: false
     },
     {
       route: '/profile',
-      name: 'Profile'
+      name: 'Profile',
+      hide: !token
     },
     {
       route: '/photos',
-      name: 'Photos'
+      name: 'Photos',
+      hide: false
     },
     {
       route: '/login',
-      name: 'Login'
+      name: 'Login',
+      hide: token
     },
     {
       route: '/register',
-      name: 'Register'
+      name: 'Register',
+      hide: token
     },
     {
       route: '/admin',
-      name: 'Administration'
+      name: 'Administration',
+      hide: user?.role !== 'ADMIN_ROLE'
     }
   ]
+  const cerrarSesion = ()=> {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    navigate('/')
+  }
+  // useEffect(()=> {
+  //   // console.log('Hola soy el navbar')
+  // },[location])
+  // if (link.hide) {
+  //   HACE EL CODIGO
+  // }
+
+  // ternarios
+
+  // link.hide ? hace el codigo : y sino hace este
+
+  // link.hide && hace el codigo
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid">
-        <NavLink className="navbar-brand" to='/'>Photos APP</NavLink>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-           {links.map(link => (
-            <li key={link.route} className="nav-item">
-              <NavLink className="nav-link" to={link.route}>{link.name}</NavLink>
+
+      <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="#home">Fotos app</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            {links.map(link => (
+              <li key={link.route} className={`nav-item ${link.hide && 'd-none'}`}>
+                <NavLink className="nav-link" to={link.route}>{link.name}</NavLink>
+              </li>
+            ))}
+            <li onClick={()=> cerrarSesion()} className={`nav-item ${!token && 'd-none'}`}>
+              <span className='nav-link'>Cerrar sesion</span>
             </li>
-           ))}
-          </ul>
-        </div>
-      </div>
-    </nav>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+    
   );
 };
 

@@ -1,24 +1,54 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
+  const [values, setValues] = useState({email: '', password: ''})
+  const axios = require('axios');
+  const URL = 'http://localhost:8080/api'
+  const [error, setError] = useState(undefined)
+
+  const navigate = useNavigate()
+
+  const handleChange = (target) => {
+    setValues({...values, [target.name]: target.value})
+
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    if(values.email.length >= 10 && values.password.length >= 5)  {
+      axios.post(`${URL}/login`, values)
+        .then(function (response) {
+          console.log('POST LOGIN',response.data)
+          if(response.data.success) {
+            localStorage.setItem('token', JSON.stringify(response.data.token))
+            localStorage.setItem('user', JSON.stringify(response.data.item))
+            navigate('/')
+          } else {
+            setError(response.data.msg)
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    } else {
+      console.log('Campos invalidos')
+    }
+  }
   return (
     <div className='container'>
       <p>Login</p>
-      <form className='w-50'>
+      <form onSubmit={handleSubmit} className='w-50'>
         <div className="mb-3">
-          <label for="exampleInputEmail1" className="form-label">Email address</label>
-          <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-          <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+          <label className="form-label">Email address</label>
+          <input onChange={(e) => handleChange(e.target)} name="email" minLength={10} required  type="email" className="form-control"/>
+          <div className="form-text">We'll never share your email with anyone else.</div>
         </div>
         <div className="mb-3">
-          <label for="exampleInputPassword1" className="form-label">Password</label>
-          <input type="password" className="form-control" id="exampleInputPassword1" />
+          <label className="form-label">Password</label>
+          <input onChange={(e) => handleChange(e.target)} name="password" minLength={5} required type="password" className="form-control" />
         </div>
-        <div className="mb-3 form-check">
-          <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-          <label className="form-check-label">Check me out</label>
-        </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <p>{error}</p>
+        <button type="submit" className="btn btn-primary">Login</button>
       </form>
     </div>
   );

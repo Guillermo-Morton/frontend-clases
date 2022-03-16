@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div>
-      <NavigationBar/>
+        <NavigationBar/>
         <Routes>
             <Route index element={<Home />} />
             <Route path="profile" element={<Profile />} />
