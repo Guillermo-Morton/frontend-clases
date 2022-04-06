@@ -7,7 +7,7 @@ const Profile = () => {
     const [selling, setSelling] = useState(false)
     const uid = JSON.parse(localStorage.getItem('user'))?.uid 
     const axios = require('axios');
-    const URL = 'http://localhost:8080/api'
+    const URL = 'https://sport-photo-app.herokuapp.com/api'
 
     const getUser = (id) => {
         axios.get(`${URL}/user/${id}`).then(response => {

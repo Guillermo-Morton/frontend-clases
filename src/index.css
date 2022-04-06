@@ -39,3 +39,19 @@ code {
   height: 600px;
   object-fit: cover;
 }
+.father-event{
+  position: relative;
+}
+.event-overlay {
+  background-color: rgba(0, 0, 0, 0.329);
+  transition: ease-in-out 0.2s;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  height: 600px;
+}
+.event-overlay:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+  transition: ease-in-out 0.2s;
+}

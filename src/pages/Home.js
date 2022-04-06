@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Home = () => {
     const axios = require('axios');
-    const URL = 'http://localhost:8080/api'
+    const URL = 'https://sport-photo-app.herokuapp.com/api'
     
     const [events, setEvents] = useState([])
 
@@ -27,10 +27,14 @@ const Home = () => {
         <div className='container'>
             <p>Home</p>
             {events.map(event => (
-                <div className='my-2' key={event.id}>
+                <div className='my-2  father-event' key={event.id}>
                     <Link to={`/photos/${event.id}`}>
                         <img className='w-100 events' src={event.url} alt={event.nombre} />
+                        <div className='w-100 event-overlay p-5'>
+                            <h2 className='text-light'>{event.name}</h2>
+                        </div>
                     </Link>
+                   
                 </div>
             ))}
         </div>

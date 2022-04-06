@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 const Register = () => {
   const [values, setValues] = useState({email: '', password: '', name: ''})
   const axios = require('axios');
-  const URL = 'http://localhost:8080/api'
+  const URL = 'https://sport-photo-app.herokuapp.com/api'
 
   const navigate = useNavigate()
 

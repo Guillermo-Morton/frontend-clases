@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 const Photos = () => {
     const params = useParams()
     const axios = require('axios');
-    const URL = 'http://localhost:8080/api'
+    const URL = 'https://sport-photo-app.herokuapp.com/api'
     
     const [photos, setPhotos] = useState([])
     const [user, setUser] = useState({name: '', balance: '', photos: []})

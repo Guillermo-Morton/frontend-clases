@@ -8,7 +8,7 @@ const CrudPhotos = () => {
   const [editing, setEditing] = useState(false)
 
   const axios = require('axios');
-  const URL = 'http://localhost:8080/api'
+  const URL = 'https://sport-photo-app.herokuapp.com/api'
 
   const handleChange = (target) => {
     setValues({...values, [target.name]: target.value})
